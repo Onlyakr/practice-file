@@ -1,7 +1,8 @@
 import Button from "./Button";
-const Friend = ({ friend }) => {
+const Friend = ({ friend, onSelectFriend, selectedFriend }) => {
+  const isSelected = selectedFriend?.id === friend.id;
   return (
-    <li>
+    <li className={isSelected ? "selected" : ""}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       {friend.balance === 0 ? (
@@ -15,7 +16,9 @@ const Friend = ({ friend }) => {
           You owe {friend.name} {Math.abs(friend.balance)}$
         </p>
       )}
-      <Button>Select</Button>
+      <Button onClick={() => onSelectFriend(friend)}>
+        {isSelected ? "Close" : "Select"}
+      </Button>
     </li>
   );
 };
