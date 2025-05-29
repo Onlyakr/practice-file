@@ -1,22 +1,21 @@
-import { useState } from "react";
-
-const Item = ({ item }) => {
-  const [isPacked, setIsPacked] = useState(false);
-  //   console.log(isPacked);
+const Item = ({ item, onDeleteItem, onToggleItem }) => {
   return (
     <li>
       <input
         type="checkbox"
-        onClick={() => {
-          setIsPacked(!isPacked);
-        }}
+        value={item.isPacked}
+        onChange={() => onToggleItem(item.id)}
       />
-      <span
-        style={isPacked === true ? { textDecorationLine: " line-through" } : {}}
-      >
+      <span style={item.isPacked ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
       </span>
-      <button>❌</button>
+      <button
+        onClick={() => {
+          onDeleteItem(item.id);
+        }}
+      >
+        ❌
+      </button>
     </li>
   );
 };
